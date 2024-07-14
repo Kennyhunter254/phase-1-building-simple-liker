@@ -3,25 +3,9 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
-
-// Add the .hidden class to the error modal in the HTML so it does not appear when the page first loads
 document.addEventListener('DOMContentLoaded', () => {
   const errorModal = document.getElementById('modal');
   errorModal.classList.add('hidden');
-
-  // Function to simulate making a server request
-  function mimicServerCall(url="http://mimicServer.example.com", config={}) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        let isRandomFailure = Math.random() < .2
-        if (isRandomFailure) {
-          reject("Random server error. Try again.");
-        } else {
-          resolve("Pretend remote server notified of action!");
-        }
-      }, 300);
-    });
-  }
 
   // Function to handle heart click
   function handleHeartClick(event) {
@@ -30,11 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heart.classList.contains('like-glyph')) {
       mimicServerCall()
         .then(() => {
-          if (heart.innerText === '♡') {
-            heart.innerText = '♥';
+          if (heart.innerText === EMPTY_HEART) {
+            heart.innerText = FULL_HEART;
             heart.classList.add('activated-heart');
           } else {
-            heart.innerText = '♡';
+            heart.innerText = EMPTY_HEART;
             heart.classList.remove('activated-heart');
           }
         })
